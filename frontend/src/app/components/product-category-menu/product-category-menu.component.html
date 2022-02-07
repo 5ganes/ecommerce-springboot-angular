@@ -1,0 +1,20 @@
+<div class="menu-sidebar-content js-scrollbar1">
+    <nav class="navbar-sidebar">
+        <ul class="list-unstyled navbar-list">
+            <li *ngFor="let cat of productCategories">
+                <a routerLink="/category/{{cat.id}}" routerLinkActive="avtive-link">{{cat.categoryName}}</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- <nav class="navbar-sidebar">
+    <ul class="list-unstyled navbar-list">
+        <li>
+            <a routerLink="/category/1" routerLinkActive="avtive-link">Books</a>
+        </li>
+        <li>
+            <a routerLink="/category/2" routerLinkActive="avtive-link">Coffee Mugs</a>
+        </li>
+    </ul>
+</nav> -->
