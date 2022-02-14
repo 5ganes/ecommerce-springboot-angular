@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject, Subject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { CartItem } from '../common/cart-item';
 
 @Injectable({
@@ -9,8 +9,8 @@ export class CartService {
 
   cartItems: CartItem[] = [];
 
-  totalPrice: Subject<number> = new ReplaySubject<number>();
-  totalQuantity: Subject<number> = new ReplaySubject<number>();
+  totalPrice: Subject<number> = new BehaviorSubject<number>(0);
+  totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
   //sessionStorage - stores data of single tab
   // localStorage - stores data across the tabs and browser restart

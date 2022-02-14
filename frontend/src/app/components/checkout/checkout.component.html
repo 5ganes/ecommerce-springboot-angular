@@ -56,7 +56,6 @@
                     </div>
                 </div>
 
-
                 <!-- shipping address -->
                 <div formGroupName="shippingAddress" class="form-area">
                     <h3>Shipping Address</h3>
@@ -237,8 +236,20 @@
                     </div>
                 </div>
 
-                <!-- creditCard information -->
+                <!-- Stripe elements credit card section -->
                 <div formGroupName="creditCard" class="form-area">
+                    <h3>Credit or Debit Card</h3>
+
+                    <div id="card-element">
+
+                    </div>
+
+                    <div id="card-errors" class="displayError.textContent!=='': 'alert alert-danger mt-1'"></div>
+
+                </div>
+
+
+                <!-- <div formGroupName="creditCard" class="form-area">
                     <h3>Credit Card Information</h3>
                     <div class="row">
                         <div class="col-md-2"><label>Card Type</label></div>
@@ -321,8 +332,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
+                <!-- order details -->
                 <div class="form-area">
                     <h3>Review Your Order</h3>
                     <p>Total Quantity: {{totalQuantity}}</p>
@@ -330,8 +342,9 @@
                     <p>Total Price: {{totalPrice | currency: 'USD'}}</p>
                 </div>
 
+                <!-- submit button -->
                 <div class="text-center">
-                    <button type="submit" class="btn btn-info">Purchase</button>
+                    <button type="submit" class="btn btn-info" [disabled]="isDisabled">Purchase</button>
                 </div>
 
             </form>

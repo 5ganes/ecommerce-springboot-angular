@@ -1,10 +1,8 @@
 package com.ganesh.ecommerce.config;
 
-import com.ganesh.ecommerce.entity.Country;
-import com.ganesh.ecommerce.entity.Product;
-import com.ganesh.ecommerce.entity.ProductCategory;
-import com.ganesh.ecommerce.entity.State;
+import com.ganesh.ecommerce.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -20,6 +18,9 @@ import java.util.Set;
 @Configuration
 public class MyDataRestConfig implements RepositoryRestConfigurer {
 
+    @Value("${allowed.origins}")
+    private String[] allowedOrigins;
+
     private EntityManager entityManager;
 
     @Autowired
@@ -29,15 +30,19 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
-        HttpMethod[] theUnsupportedMethods = {HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE};
+        HttpMethod[] theUnsupportedMethods = {HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE, HttpMethod.PATCH};
 
         disableHttpMethods(Product.class, config, theUnsupportedMethods);
         disableHttpMethods(ProductCategory.class, config, theUnsupportedMethods);
         disableHttpMethods(Country.class, config, theUnsupportedMethods);
         disableHttpMethods(State.class, config, theUnsupportedMethods);
+        disableHttpMethods(Order.class, config, theUnsupportedMethods);
 
         // call an internal helper method
         exposeIds(config);
+
+        // configure cors mapping
+        cors.addMapping(config.getBasePath() + "/**").allowedOrigins(allowedOrigins);
 
     }
 
